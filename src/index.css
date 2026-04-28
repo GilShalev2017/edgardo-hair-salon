@@ -8,35 +8,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 36 45% 96%;
+    --foreground: 228 22% 16%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 34 54% 99%;
+    --card-foreground: 228 22% 16%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 34 54% 99%;
+    --popover-foreground: 228 22% 16%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 343 57% 39%;
+    --primary-foreground: 36 45% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 164 26% 82%;
+    --secondary-foreground: 190 28% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 32 31% 89%;
+    --muted-foreground: 226 11% 43%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 43 62% 71%;
+    --accent-foreground: 28 35% 19%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 28 28% 82%;
+    --input: 28 28% 82%;
+    --ring: 343 57% 39%;
 
     --radius: 0.5rem;
+
+    --surface: 36 45% 94%;
+    --surface-raised: 36 58% 98%;
+    --surface-tint: 164 26% 90%;
+    --rose-soft: 344 64% 92%;
+    --mint: 164 28% 64%;
+    --gold: 43 62% 58%;
+    --ink: 228 22% 16%;
+    --veil: 228 22% 16%;
+    --success: 151 38% 36%;
+    --success-foreground: 36 45% 98%;
+    --gradient-hero: radial-gradient(circle at 18% 16%, hsl(var(--rose-soft)), transparent 34%), radial-gradient(circle at 86% 4%, hsl(var(--surface-tint)), transparent 30%), linear-gradient(135deg, hsl(var(--background)), hsl(var(--surface)) 55%, hsl(346 47% 93%));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(16 56% 44%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card) / 0.96), hsl(var(--surface-raised) / 0.9));
+    --shadow-elegant: 0 22px 70px -36px hsl(var(--primary) / 0.45);
+    --shadow-soft: 0 12px 36px -24px hsl(var(--ink) / 0.35);
+    --font-display: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +118,33 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  @media print {
+    body {
+      background: hsl(var(--card));
+    }
+    .no-print {
+      display: none !important;
+    }
+    .print-panel {
+      box-shadow: none !important;
+      border-color: hsl(var(--border)) !important;
+    }
+  }
+}
+
+@layer utilities {
+  .salon-sheen {
+    background-image: linear-gradient(115deg, transparent 0%, hsl(var(--card) / 0.22) 42%, transparent 72%);
+    background-size: 240% 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .salon-sheen {
+      animation: salon-sheen 7s ease-in-out infinite;
+    }
   }
 }
