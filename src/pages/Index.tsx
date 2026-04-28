@@ -292,7 +292,7 @@ const Index = () => {
     event.preventDefault();
     const parsed = templateSchema.safeParse(Object.fromEntries(new FormData(event.currentTarget)));
     if (!parsed.success) return toast.error("Add a template name and message");
-    const { error } = await supabase.from("sms_templates").insert(parsed.data);
+    const { error } = await supabase.from("sms_templates").insert({ name: parsed.data.name, message: parsed.data.message });
     if (error) return toast.error(error.message);
     toast.success("SMS template added");
     event.currentTarget.reset();
