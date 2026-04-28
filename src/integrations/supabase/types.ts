@@ -14,7 +14,186 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bleach_materials: {
+        Row: {
+          brand: string | null
+          created_at: string
+          id: string
+          name: string
+          strength: string | null
+          stylist_id: string
+          updated_at: string
+        }
+        Insert: {
+          brand?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          strength?: string | null
+          stylist_id?: string
+          updated_at?: string
+        }
+        Update: {
+          brand?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          strength?: string | null
+          stylist_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      clients: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string
+          stylist_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone: string
+          stylist_id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string
+          stylist_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      colors: {
+        Row: {
+          brand: string | null
+          code: string
+          created_at: string
+          id: string
+          name: string
+          stylist_id: string
+          updated_at: string
+        }
+        Insert: {
+          brand?: string | null
+          code: string
+          created_at?: string
+          id?: string
+          name: string
+          stylist_id?: string
+          updated_at?: string
+        }
+        Update: {
+          brand?: string | null
+          code?: string
+          created_at?: string
+          id?: string
+          name?: string
+          stylist_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sms_templates: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          name: string
+          stylist_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          name: string
+          stylist_id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          name?: string
+          stylist_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      treatments: {
+        Row: {
+          bleach_material_id: string | null
+          client_id: string
+          color_ids: string[]
+          created_at: string
+          hair_length: Database["public"]["Enums"]["hair_length"] | null
+          id: string
+          notes: string | null
+          occurred_at: string
+          price: number | null
+          stylist_id: string
+          treatment_type: Database["public"]["Enums"]["treatment_type"]
+          updated_at: string
+        }
+        Insert: {
+          bleach_material_id?: string | null
+          client_id: string
+          color_ids?: string[]
+          created_at?: string
+          hair_length?: Database["public"]["Enums"]["hair_length"] | null
+          id?: string
+          notes?: string | null
+          occurred_at?: string
+          price?: number | null
+          stylist_id?: string
+          treatment_type: Database["public"]["Enums"]["treatment_type"]
+          updated_at?: string
+        }
+        Update: {
+          bleach_material_id?: string | null
+          client_id?: string
+          color_ids?: string[]
+          created_at?: string
+          hair_length?: Database["public"]["Enums"]["hair_length"] | null
+          id?: string
+          notes?: string | null
+          occurred_at?: string
+          price?: number | null
+          stylist_id?: string
+          treatment_type?: Database["public"]["Enums"]["treatment_type"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "treatments_bleach_material_id_fkey"
+            columns: ["bleach_material_id"]
+            isOneToOne: false
+            referencedRelation: "bleach_materials"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "treatments_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +202,15 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      hair_length: "short" | "long"
+      treatment_type:
+        | "men_haircut"
+        | "women_haircut"
+        | "children_haircut"
+        | "fringe_bangs"
+        | "highlights"
+        | "men_coloring"
+        | "women_coloring"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +337,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      hair_length: ["short", "long"],
+      treatment_type: [
+        "men_haircut",
+        "women_haircut",
+        "children_haircut",
+        "fringe_bangs",
+        "highlights",
+        "men_coloring",
+        "women_coloring",
+      ],
+    },
   },
 } as const
